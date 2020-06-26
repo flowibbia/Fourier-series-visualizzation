@@ -1,0 +1,29 @@
+{
+  "name": "project_reti",
+  "version": "1.0.0",
+  "description": "# project_reti",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowibbia/project_reti.git"
+  },
+  "keywords": [
+    "p5",
+    "javascript",
+    "fourier",
+    "express"
+  ],
+  "author": "nico fiorini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flowibbia/project_reti/issues"
+  },
+  "homepage": "https://github.com/flowibbia/project_reti#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
