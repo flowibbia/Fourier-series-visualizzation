@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/flowibbia/project_reti#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
   }
 }
