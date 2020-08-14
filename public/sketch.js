@@ -71,7 +71,11 @@ function draw(){
   }
 
   endShape();
-  time+=0.005;
+  time+=0.05;
 
+  //remove the last element when 
+  if(wave.length > 600){
+    wave.pop();
+  }
 }
 
