@@ -1,14 +1,10 @@
 let time  =0;
+let an=[];
+let bn=[];
+let wave = []; 
 
-//let coefficients= require('./array');
-
-// console.log(coefficients[0]);
-// console.log(coefficients[1]);
-
-
-//let n= 1;
-
-let wave = [];
+an.push(3);
+bn.push(1);
 
 function setup(){
 
@@ -28,14 +24,14 @@ function draw(){
 
   let x=0;
   let y=0;
-
+  let number=1;
   
-  for(let i=0;i<40;i++){
+  for(let i=0;i<an.length;i++){
 
     let prevx=x;
     let prevy=y;
 
-    let n= i*2 +1;
+    //let n= i*2 +1;
 
     let  radius = 50 * (4 / (n*PI));
 
@@ -47,7 +43,7 @@ function draw(){
 
     ellipse(prevx,prevy,radius*2);
 
-    if(i==39)
+    if(i==number-1)
       wave.unshift(y);
   
    //linea che gira intorno al cerchio
@@ -55,7 +51,6 @@ function draw(){
    fill(255);
    line(prevx,prevy,x,y);
   
-
   }
   //trasla e disegna sinusoide e linea che ci va appresso
   beginShape();
