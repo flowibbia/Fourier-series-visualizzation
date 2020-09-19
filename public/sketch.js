@@ -1,10 +1,34 @@
 let time  =0;
-let an=[];
-let bn=[];
-let wave = []; 
 
-an.push(3);
-bn.push(1);
+let wave = []; 
+let coefficient = require("../server")
+//this comment was good
+// let coefficients = [] ;
+
+// class coefficient {
+//   constructor(_amplitude, _phase) {
+//     this.amplitude= _amplitude;
+//     this.phase= _phase;
+//   }
+// }
+
+// for(let i=0;i<40;i++){
+
+
+//     let n= i*2 +1;
+
+
+//     let _amplitude =  50 * (4 / (n*3.14));
+
+//     let coef= new coefficient(_amplitude,n);
+//     coefficients.push(coef);
+// }
+
+
+an.push(4/3.14);
+an.push(0);
+an.push(4/(3*3.14));
+bn.push(0);
 
 function setup(){
 
@@ -12,8 +36,6 @@ function setup(){
     //cnv.position(0,0);
   //createCanvas(600, 400);
 
-  // let slider = createSlider(1, 100, 1, 1);
-  // slider.position(0,420);
 }
 
 function draw(){
@@ -24,27 +46,28 @@ function draw(){
 
   let x=0;
   let y=0;
-  let number=1;
   
-  for(let i=0;i<an.length;i++){
+  for(let i=0;i < coefficients.length; i++){
 
-    let prevx=x;
-    let prevy=y;
-
+    let prevx = x;
+    let prevy = y;
     //let n= i*2 +1;
 
-    let  radius = 50 * (4 / (n*PI));
+    // let  radius = 50 * (4 / (n*PI));
+    let  radius = coefficients[i].amplitude;
 
-    x += radius *  cos(n*time);
-    y += radius *  sin(n*time);
+    //get cordinate for the end of the line
+    x += radius *  cos((i+1)*time);
+    y += radius *  sin((i+1)*time);
 
     noFill();
     stroke(120);
 
     ellipse(prevx,prevy,radius*2);
 
-    if(i==number-1)
+    if(i==coefficients.length-1){
       wave.unshift(y);
+    }
   
    //linea che gira intorno al cerchio
    stroke(255);
