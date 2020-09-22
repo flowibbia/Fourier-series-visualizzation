@@ -29,7 +29,6 @@ app.post('/coefficient',(request,response) => {
 
 console.log("My server running at port " + port);
 
-
 class coefficient {
   constructor(_amplitude, _phase) {
     this.amplitude = _amplitude;
