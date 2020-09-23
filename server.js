@@ -4,7 +4,7 @@ const fs=require('fs');
 let port = 3000
 let app = express();
 let coefficients   = [];
-let raggio = [];
+let radius = [];
 let angle  = [];
 
 
@@ -14,18 +14,46 @@ app.use(express.static('public'));
 
 app.use(express.json({limit : '1mb'})); //this protect my server for flooding of huge quantity of data 
 
-
 //todo, check this
-app.post('/coefficient',(request,response) => {
+app.get('/coefficient',(request,response) => {
     console.log('I got a request for coefficient');
-
-    response.json({
+    let res=response.json({
         status: 'success',
-        radius: data.radius,
-        angle: data.angle
+        radius: 1,
+        angle: 1
     });
 
+    console.log(res);
+
 });
+
+app.post('/api',(request,response) =>{
+
+  console.log('I got a request');
+  console.log(request.body);
+
+ // console.log(radius[0]);
+  radius[0]=request.body.radius;
+  angle[0]= request.body.angle;
+  console.log(radius[0]);
+  console.log(angle[0]);
+  console.log(request.body);
+  response.json({
+    status: 'success',
+    radius: radius[0],
+    angle: angle[0] 
+  });
+})
+// app.get('/debug',(request,response)=>{
+//   console.log('debug is clicked');
+//  // response.json()
+//   response.json({
+//         status: 'success',
+//         radius:1,
+//         angle:1
+//     });
+//  // response.send(debug is clicked);
+// })
 
 console.log("My server running at port " + port);
 
@@ -48,7 +76,7 @@ for(let i=0;i<40;i++){
 }
 
 //module.exports= coefficients
-module.export = coefficients;
+
 
 
 // const express = require('express');

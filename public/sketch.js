@@ -1,6 +1,29 @@
 let time  =0;
+let coefficients0 = [];  //array for debug
 
-let coefficients = [];
+let coefficients = [];   //array to fill from the server or the form
+
+function myFunction(){
+
+  //here i have to get the data from the form
+  const data = {  //data for debug
+    radius:63,
+    angle: 1
+   };
+
+  const options={
+    method: 'POST',
+    headers:{"Content-type": "application/json"},
+    body: JSON.stringify(data)
+  }
+
+  fetch('/api',options).then(res => {  
+    return res.json();
+  })
+  .then(obj=>{
+    appo=obj;
+    console.log(appo)})
+}
 
 class coefficient {
   constructor(_radius, _angle) {
@@ -9,17 +32,18 @@ class coefficient {
   }
 }
 
+console.log(appo)
 
-//get coefficient automatically for rectangular impulse
+//get coefficient automatically for rectangular impulse and store in the array for debug 
 for(let i=0;i<40;i++){
 
     let n= i*2 +1;
     let  radius = 50 * (4 / (n*3.14));
     let coef= new coefficient(radius,n);
 
-    coefficients.push(coef);
+    coefficients0.push(coef);
     
-  console.log(coefficients[i].radius);
+  console.log(coefficients0[i].radius);
 }
 
 let wave = [];  //point of the function
@@ -40,22 +64,25 @@ function draw(){
   let x=0;
   let y=0;
 
+  if(appo!=undefined)
+    {
+      console.log(appo.radius);
+    }
+
   for(let i=0;i<num;i++){
 
      let prevx=x;
      let prevy=y;
 
-    // let n= i*2 +1;
+    x += coefficients0[i].radius *  cos(coefficients0[i].angle*time);  //todo aggiustare l'indice di sfasamento
+    y += coefficients0[i].radius *  sin(coefficients0[i].angle*time);
 
-    // let  radius = 50 * (4 / (n*PI));
-
-    x += coefficients[i].radius *  cos((i*2+1)*time);  //todo aggiustare l'indice di sfasamento
-    y += coefficients[i].radius *  sin((i*2+1)*time);
+    
 
     noFill();
     stroke(120);
 
-    ellipse(prevx,prevy,coefficients[i].radius*2);
+    ellipse(prevx,prevy,coefficients0[i].radius*2);
 
     if(i==num-1)
       wave.unshift(y);
@@ -79,8 +106,7 @@ function draw(){
   for (let i = 0 ; i < wave.length; i++){
     vertex(i,wave[i]); 
   }
-
   endShape();
-  time+=0.05;
+  time+=0.02;
 
 }
