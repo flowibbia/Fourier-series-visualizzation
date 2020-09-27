@@ -88,6 +88,7 @@ for(let i=0;i<40;i++){
 }
 
 app.get('/rectangular',(req,res)=>{
+  // res.send("sdadf");
   console.log('I got a rectangular request')
   res.json(rect_coefficients);
 })

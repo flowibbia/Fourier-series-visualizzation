@@ -19,8 +19,8 @@ for(let i=0;i<40;i++){
 
     let n= i*2 +1;
     let  radius = 50 * (4 / (n*3.14));
-    let coef= new coefficient(radius,n);
 
+    let coef= new coefficient(radius,n);
     coefficients0.push(coef);
     
 }
@@ -35,14 +35,12 @@ myForm.addEventListener('submit', (e) =>{
 
     e.preventDefault();    //todo rivedere bene questa funzione
 
-    const formData = new FormData(myForm);  //why i don't write this in the arcument
+    const formData = new FormData(myForm);  //why i don't write this in the argument
 
     const data={
       radius:formData.get('Xn'),
       angle:formData.get('angle')
     }
-
-    console.log(data.angle);
 
     fetch('/form',{
       method: 'POST',
@@ -94,6 +92,9 @@ function rectangular(){
     console.log(coefficients[0]);
     console.log(coefficients[1]);
   })
+  .catch(err=>{
+    console.log(err);
+  })
 }
 
 
@@ -127,8 +128,8 @@ function draw(){
      let prevx=x;
      let prevy=y;
 
-    x += coefficients[i].radius *  cos(coefficients0[i].angle*time);  
-    y += coefficients[i].radius *  sin(coefficients0[i].angle*time);
+    x += coefficients[i].radius *  cos(coefficients[i].angle*time);  
+    y += coefficients[i].radius *  sin(coefficients[i].angle*time);
 
 
     noFill();
@@ -158,8 +159,9 @@ function draw(){
   for (let i = 0 ; i < wave.length; i++){   //disegno di tutta l'onda
     vertex(i,wave[i]); 
   }
+
   endShape();
-  time-=0.02;
+  time+=0.02;
 
   // if(wave.length>600){
   //   wave.pop();
