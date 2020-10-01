@@ -1,0 +1,29 @@
+html {
+  color:#ecece6;
+  background-color:#282a36;
+  font-size: 18px; /* px means "pixels": the base font size is now 10 pixels high  */
+  font-family: 'Baloo Tamma 2', cursive;
+}
+
+body{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: rgb(9, 9, 43);
+  text-align: center;
+}
+
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+section {
+  padding: 20px;
+}
+
+p{
+  line-height: 1.5;
+}
