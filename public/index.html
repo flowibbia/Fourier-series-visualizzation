@@ -24,25 +24,25 @@
 	<!-- <form action="/coefficient" method="POST"> -->
 
 	<p>
+
 	<form class="form" id="myForm">
 		<label for="amplitude">Amplitude:</label>
 
-		<input type="number" id="amplitude" name="amplitude" min="0" max="100">
+		<input type="number" id="amplitude" name="amplitude" min="0" max="200">
 
 		<label for="frequency">n:</label>
 
-		<input type="number" id="frequency" name="frequency" min="0" max="100">
+		<input type="number" id="frequency" name="frequency" min="0" max="200">
 
 		<button id="submit">Submit</button>
-
 	</form>
 
-	<button id="debug" type="submit" onclick="myFunction()"> debug </button>
 	<button id="rectangular" type="submit" onclick="rectangular()"> rect </button>
-	<form action="/" method="">
-		<button id="reset" type="submit" onclick="reset()">reset</button>
+
+	<form action="/reset" method="POST">
+		<button id="reset" type="submit">reset</button>
 	</form>
-	<!-- vedere se mi conviene usare la funzione fetch -->
+
 	</p>
 
 	<script src="sketch.js"></script>

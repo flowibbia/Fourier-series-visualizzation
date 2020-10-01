@@ -2,7 +2,8 @@ const { response } = require('express');
 const express = require('express');
 // const fs=require('fs');
 
-let port = 3000
+let port = 4000;
+
 let app = express();
 
 // let radius = [];
@@ -18,7 +19,7 @@ app.use(express.json({limit : '1mb'})); //this protect my server for flooding of
 
 class coefficient {
   constructor(_amplitude, _frequency) {
-    this.radius = _amplitude;
+    this.amplitude = _amplitude;
     this.frequency = _frequency;
   }
 }
@@ -36,11 +37,8 @@ for(let i=0;i<40;i++){
 
 let coefficients= []; 
 
-app.get("/", (req,res)=> {
-  for(let i=0;i<coefficients.length-1;i++){
-    coefficients[i].pop();
-  }
-  response.send(express.static('public'));
+app.post("/reset", (request,response) => {
+  coefficients = [];
 });
 
 app.get("/reload",(req,res)=>{
@@ -49,7 +47,6 @@ app.get("/reload",(req,res)=>{
 
 app.post('/form',(request,response)=>{
   console.log('I got a form request');
-  //console.log(request.body);
 
   coefficients.push(request.body);
   console.log(coefficients[coefficients.length-1]);

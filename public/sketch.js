@@ -81,7 +81,7 @@ function myFunction(){
 function rectangular(){
   fetch('/rectangular')
   .then(res =>{
-    console.log('Igot a rectangular request')
+    console.log('I got a rectangular request')
     return res.json();
   }).then(obj =>{
     //console.log(obj);
@@ -97,16 +97,15 @@ function rectangular(){
 }
 
 
-
-
-let wave = [];  //point of the function
-let num=10;     //number of coefficient
+let wave = [];  //array of point of the function
+// let num=10;     //number of coefficient
 
 
 function setup(){
 
-  let cnv=createCanvas(1000,600);
+  createCanvas(1000,600);
   stroke(255);
+
 }
 
 function draw(){
@@ -124,10 +123,6 @@ function draw(){
   let y=0;
 
   
-  //print for debug todo remove
-  // if(coefficients.length!=0){
-  //     console.log(coefficients[0]);
-  //}
 
   for(let i=0;i<coefficients.length;i++){  //before was num
 
