@@ -1,31 +1,28 @@
-const xhr = new XMLHttpRequest();
+// const xhr = new XMLHttpRequest();
 
-xhr.onload= ()=>{
+// xhr.onload= ()=>{
 
-}
+// }
 
-let time  =0;
-let coefficients0 = [];  //array for debug
-
-class coefficient {
-  constructor(_radius, _angle) {
-    this.radius = _radius;
-    this.angle = _angle;
-  }
-}
-
-//get coefficient automatically for rectangular impulse and store in the array for debug 
-for(let i=0;i<40;i++){
-
-    let n= i*2 +1;
-    let  radius = 50 * (4 / (n*3.14));
-
-    let coef= new coefficient(radius,n);
-    coefficients0.push(coef);
-    
-}
-
+let time  = 0;
 let coefficients = [];   //array to fill from the server or the form
+
+// if (window.performance) {
+//   console.info("window.performance works fine on this browser");
+// }
+//console.info(performance.navigation.type);
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  //put the data on the server 
+    fetch('/reload')
+    .then(res=>{
+      return res.json();
+    }).then(obj =>{
+      time=0;
+      coefficients=obj;
+    }).catch((err) => {
+      console.error(err);
+    }) 
+} 
 
 
 //from mdn 
@@ -38,10 +35,11 @@ myForm.addEventListener('submit', (e) =>{
     const formData = new FormData(myForm);  //why i don't write this in the argument
 
     const data={
-      radius:formData.get('Xn'),
-      angle:formData.get('angle')
+      amplitude :formData.get('amplitude'),
+      frequency :formData.get('frequency')
     }
 
+    //put the data on the server 
     fetch('/form',{
       method: 'POST',
       headers:{"Content-type": "application/json"},
@@ -50,7 +48,8 @@ myForm.addEventListener('submit', (e) =>{
       return res.json();
     }).then(obj =>{
       time=0;
-      coefficients.push(obj)
+      coefficients.push(obj);
+      console.log(obj);
     }).catch((err) => {
       console.error(err);
     }) 
@@ -59,8 +58,8 @@ myForm.addEventListener('submit', (e) =>{
 function myFunction(){
   //here i have to get the data from the form
   const data = {  //data for debug
-    radius:63,
-    angle: 1
+    amplitude :63,
+    frequency: 1
    };
 
   const options={
@@ -106,18 +105,25 @@ let num=10;     //number of coefficient
 
 function setup(){
 
-  let cnv=createCanvas(1000,400);
+  let cnv=createCanvas(1000,600);
+  stroke(255);
 }
 
 function draw(){
 
   background(0,10,50);
 
-  translate(200,200);
+  //return when coefficients is empty
+  if(coefficients.length==0)
+    return;
+
+  line(200,300,1000,300);
+  translate(200,300);
 
   let x=0;
   let y=0;
 
+  
   //print for debug todo remove
   // if(coefficients.length!=0){
   //     console.log(coefficients[0]);
@@ -128,16 +134,15 @@ function draw(){
      let prevx=x;
      let prevy=y;
 
-    x += coefficients[i].radius *  cos(coefficients[i].angle*time);  
-    y += coefficients[i].radius *  sin(coefficients[i].angle*time);
-
+    x += coefficients[i].amplitude *  cos(coefficients[i].frequency*time);  
+    y += coefficients[i].amplitude *  sin(coefficients[i].frequency*time);
 
     noFill();
     stroke(120);
 
-    ellipse(prevx,prevy,coefficients[i].radius*2);
+    ellipse(prevx,prevy,coefficients[i].amplitude*2);
 
-    if(i==coefficients.length-1)  //memorizzo in un array i valori del sin
+    if(i==coefficients.length-1)  
       wave.unshift(y);
 
    //linea che gira intorno al cerchio
@@ -147,24 +152,29 @@ function draw(){
   }
 
 
-  //trasla e disegna sinusoide e linea che ci va appresso
-  beginShape();
-  translate(200,0);
-  line(x-200,y,0,y)
-
-  //-200 perchè ho traslato di 200 a destra
-  ellipse(0,y,5,5)
-  noFill();
-
-  for (let i = 0 ; i < wave.length; i++){   //disegno di tutta l'onda
-    vertex(i,wave[i]); 
+  /*draw the function linking all point of wave[] */
+  {
+    beginShape();
+    translate(200,0);
+    line(x-200,y,0,y)
+  
+    //-200 perchè ho traslato di 200 a destra
+    ellipse(0,y,5,5)
+    noFill();
+  
+    for (let i = 0 ; i < wave.length; i++){   //disegno di tutta l'onda
+      vertex(i,wave[i]); 
+    }
+  
+    endShape();
   }
 
-  endShape();
-  time+=0.02;
+  //
+  time-=0.02;
 
-  // if(wave.length>600){
-  //   wave.pop();
-  // }
+
+  if(wave.length>600){
+     wave.pop();
+  }
 
 }
