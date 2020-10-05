@@ -14,21 +14,39 @@
 
 	<script src="libraries/p5.dom.js"></script>
 
-	<!-- <script src="libraries/p5.sound.js"></script> -->
-
 </head>
 
 <body>
 
-	<h1>Sovrapposizioni di sinusoidi</h1>
-	<!-- <form action="/coefficient" method="POST"> -->
+	<h1>Play with Sines</h1>
 
+	<p>This project was inspired by the following article 
+		<a href="https://bilimneguzellan.net/en/purrier-series-meow-and-making-images-speak/">Purrier Series</a><br>
+		The purpose of this project is just to play with sines, from the article linking above, 
+		you can see that you can approximate periodic function with sums of sines.
+
+		A trivial sines is composed from an amplitude and a frequency, below you can see graphically how multiple sines
+		are added togheter, and if you put right fourier coefficient for a function, you can approximate it.
+
+		From the button rectangle wave and triangle wave, you get 15 coefficient for the relative function.<br>
+
+	</p>
+
+	<h2>How to play</h2>
 	<p>
+		The amplitude is expressed in pixel, if the coefficient is too small, scale all coefficient multiplying for the same 
+		factor.<br>
+		The n box is for the n-th coefficient and is a multiple of the fundamental frequency, don't worry for the value of this, 
+		it is irrelevant for the shape of the function.
+
+	</p>
+
+	<div class="center">
 
 	<form class="form" id="myForm">
 		<label for="amplitude">Amplitude:</label>
 
-		<input type="number" id="amplitude" name="amplitude" min="0" max="200">
+		<input type="number" id="amplitude" step=0.001 name="amplitude" min="0" max="200">
 
 		<label for="frequency">n:</label>
 
@@ -37,13 +55,12 @@
 		<button id="submit">Submit</button>
 	</form>
 
-	<button id="rectangular" type="submit" onclick="rectangular()"> rect </button>
+	<button id="rectangular" type="submit" onclick="rectangular()"> rectangle wave </button>
+	<button id="triangular" type="submit"  onclick="triangular()">triangle wave</button>
+	<button id="reset" type="submit" onclick="reset()"> reset </button>
 
-	<form action="/reset" method="POST">
-		<button id="reset" type="submit">reset</button>
-	</form>
 
-	</p>
+</div>
 
 	<script src="sketch.js"></script>
 

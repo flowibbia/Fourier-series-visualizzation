@@ -5,12 +5,16 @@ html {
   font-family: 'Baloo Tamma 2', cursive;
 }
 
+h1, .center {
+  text-align: center;
+}
+
 body{
   width: 100%;
   max-width: 1200px;
+  padding: 30px;
   margin: 0 auto;
   background-color: rgb(9, 9, 43);
-  text-align: center;
 }
 
 
@@ -18,10 +22,6 @@ img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
-}
-
-section {
-  padding: 20px;
 }
 
 p{
