@@ -13,40 +13,10 @@ app.use(express.static('public'));
 //use json middleware
 app.use(express.json());
 
- //data structure for coefficient
-class coefficient {
-  constructor(_amplitude, _nth) {
-    this.amplitude = _amplitude;
-    this.nth = _nth;
-  }
-}
-app.get("/",(req,res)=>{
-  console.log(req);
-
-})
-
-//
-let rect_coefficients = [];
-let triang_coefficients = [];
-
-//fill vectors with appropriate coefficient for rectangular and triangular wave
-for (let i = 0; i < 15; i++) {
-  let n = i * 2 + 1;
-  let amplitude = 100 * (4 / (n * 3.14));
-
-  let rect_coef = new coefficient(amplitude, n);
-  rect_coefficients.push(rect_coef);
-
-  amplitude = 30 * ((16 / (3.14)) * ((-1) ** ((n - 1) / 2)) / (n ** 2));
-  triang_coef = new coefficient(amplitude, n);
-  triang_coefficients.push(triang_coef);
-}
-
-//array for save form data
-let coefficients = [];
-
+//routin management 
 app.get("/reset", (req, res) => {
   //delete coefficient and response with empty array
+  console.log("coefficient deleted");
   coefficients = [];
   res.json(coefficients);
 })
@@ -83,4 +53,30 @@ app.get('/triangular', (req, res) => {
   coefficients = [];
   res.json(triang_coefficients);
 }) 
+
+ //data structure for coefficient
+class coefficient {
+  constructor(_amplitude, _nth) {
+    this.amplitude = _amplitude;
+    this.nth = _nth;
+  }
+}
+
+//array for save form data
+let coefficients = [];
+let rect_coefficients = [];
+let triang_coefficients = [];
+
+//fill vectors with appropriate coefficient for rectangular and triangular wave
+for (let i = 0; i < 15; i++) {
+  let n = i * 2 + 1;
+  let amplitude = 100 * (4 / (n * 3.14));
+
+  let rect_coef = new coefficient(amplitude, n);
+  rect_coefficients.push(rect_coef);
+
+  amplitude = 30 * ((16 / (3.14)) * ((-1) ** ((n - 1) / 2)) / (n ** 2));
+  triang_coef = new coefficient(amplitude, n);
+  triang_coefficients.push(triang_coef);
+}
 

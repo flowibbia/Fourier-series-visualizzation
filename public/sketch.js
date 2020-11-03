@@ -51,6 +51,10 @@ myForm.addEventListener("submit", (e) => {
     .catch((err) => {
       console.error(err);
     });
+
+
+
+
 });
 
 
@@ -86,32 +90,32 @@ function triangular() {
 
 //clear the coefficient entered both in the client and in the server
 function reset() {
-  // fetch("/reset")
-  //   .then((res) => {
-  //     return res.json();
-  //   })
-  //   .then((obj) => {
-  //     //reset time and point of the function
-  //     time = 0;
-  //     wave = [];
-  //     coefficients = obj;
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
+  fetch("/reset")
+    .then((res) => {
+      return res.json();
+    })
+    .then((obj) => {
+      //reset time and point of the function
+      time = 0;
+      wave = [];
+      coefficients = obj;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4) {
-      xhr.status == 200 ? console.log(xhr.responseText) : console.error('error');
-      time=0;
-      wave=[];
-      coefficients = JSON.parse(xhr.responseText);
-      console.log();
-    }
-  }
-  xhr.open('GET', '/reset');
-  xhr.send();
+  // const xhr = new XMLHttpRequest();
+  // xhr.onreadystatechange = () => {
+  //   if (xhr.readyState == 4) {
+  //     xhr.status == 200 ? console.log(xhr.responseText) : console.error('error');
+  //     time=0;
+  //     wave=[];
+  //     coefficients = JSON.parse(xhr.responseText);
+  //     console.log();
+  //   }
+  // }
+  // xhr.open('GET', '/reset');
+  // xhr.send();
 
 }
 
